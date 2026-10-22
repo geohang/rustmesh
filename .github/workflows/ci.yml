@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  mesher:
+    name: rustmesh (${{ matrix.os }}, ${{ matrix.rust }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest, rust: stable }
+          - { os: windows-latest, rust: stable }
+          - { os: macos-latest, rust: stable }
+          - { os: ubuntu-latest, rust: "1.83" }
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Rust ${{ matrix.rust }}
+        run: rustup toolchain install ${{ matrix.rust }} --profile minimal && rustup default ${{ matrix.rust }}
+      - name: Test the mesher
+        run: cargo test --locked -p rustmesh --features serde
+
+  app:
+    name: rustmesh-app (ubuntu-latest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: System libraries for the GUI toolkit and TLS
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config libssl-dev libxkbcommon-dev libwayland-dev \
+            libx11-dev libxcursor-dev libxrandr-dev libxi-dev libgl1-mesa-dev libgtk-3-dev
+      - name: Install Rust
+        run: rustup toolchain install stable --profile minimal && rustup default stable
+      - name: Test the sign-in and process code
+        run: cargo test --locked -p rustmesh-app --lib agent
+
+  python:
+    name: Python package (ubuntu-latest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Rust
+        run: rustup toolchain install stable --profile minimal && rustup default stable
+      - name: Build the extension and run the tests
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install maturin numpy pytest
+          maturin develop
+          pytest tests

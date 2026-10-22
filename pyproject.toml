@@ -1,0 +1,31 @@
+[build-system]
+requires = ["maturin>=1.7,<2"]
+build-backend = "maturin"
+
+[project]
+name = "rustmesh"
+description = "Quality 2D and 3D mesh generation with a Rust core."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT OR Apache-2.0"
+authors = [{ name = "Hang Chen", email = "hchen117@uiowa.edu" }]
+dependencies = ["numpy>=1.21"]
+dynamic = ["version"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: 3",
+]
+
+[project.optional-dependencies]
+pygimli = ["pygimli>=1.5"]
+
+[project.urls]
+Repository = "https://github.com/geohang/rustmesh"
+
+[tool.maturin]
+manifest-path = "crates/rustmesh-py/Cargo.toml"
+python-source = "python"
+module-name = "rustmesh._rustmesh"

@@ -1,0 +1,12 @@
+[alias]
+# cargo xtask web: build the web app into dist/web (see xtask/src/main.rs).
+xtask = "run --package xtask --"
+
+# windows-gnu: link with the LLVM linker that rustup bundles, so that no MinGW
+# installation is needed. GNU ld mislays the imports when several crates bring
+# their own import library for the same DLL (the windows-sys crates do), and the
+# desktop app then crashes before main. A RUSTFLAGS variable replaces these flags
+# (the Python build sets its own).
+[target.x86_64-pc-windows-gnu]
+linker = "rust-lld"
+rustflags = ["-C", "linker-flavor=ld.lld", "-C", "linker=rust-lld"]

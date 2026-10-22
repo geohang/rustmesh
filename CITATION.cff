@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use rustmesh in your work, please cite it using these metadata."
+title: "rustmesh: quality mesh generation in 2D and 3D"
+type: software
+authors:
+  - family-names: Chen
+    given-names: Hang
+repository-code: "https://github.com/geohang/rustmesh"
+license: "MIT OR Apache-2.0"
+version: "0.1.0"

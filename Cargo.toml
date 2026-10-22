@@ -1,0 +1,23 @@
+[workspace]
+resolver = "2"
+members = ["crates/rustmesh", "crates/rustmesh-py", "crates/rustmesh-app", "xtask"]
+# The app pulls in a GUI toolkit; build it with -p rustmesh-app.
+default-members = ["crates/rustmesh", "crates/rustmesh-py"]
+exclude = ["vendor/spade"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Hang Chen <hchen117@uiowa.edu>"]
+repository = "https://github.com/geohang/rustmesh"
+rust-version = "1.83"
+
+[workspace.dependencies]
+# The separately packaged fork carries the refinement fixes for downstream
+# consumers too. Release the fork before publishing rustmesh; see PATCHES.md.
+spade = { package = "rustmesh-spade", path = "vendor/spade", version = "=2.15.1-rustmesh.1" }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

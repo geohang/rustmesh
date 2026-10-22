@@ -1,0 +1,37 @@
+# spade 2.15.1 (https://github.com/Stoeoef/spade, MIT OR Apache-2.0), vendored
+# by rustmesh with the patches described in PATCHES.md. Examples,
+# benchmarks and dev-dependencies of the original crate are left out.
+[package]
+edition = "2021"
+name = "rustmesh-spade"
+version = "2.15.1-rustmesh.1"
+authors = ["Stefan Altmayer <stoeoef@gmail.com>"]
+description = "Delaunay triangulations for the rust ecosystem (vendored and patched by rustmesh)"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Stoeoef/spade"
+readme = "README.md"
+autoexamples = false
+autotests = false
+autobenches = false
+
+[features]
+default = ["std"]
+std = []
+
+[lib]
+name = "spade"
+path = "src/lib.rs"
+bench = false
+
+[dependencies]
+hashbrown = "0.16.1"
+mint = { version = "0.5.9", optional = true, default-features = false }
+num-traits = "0.2.19"
+robust = "1.2.0"
+serde = { version = "1.0.219", features = ["derive", "alloc"], optional = true, default-features = false }
+smallvec = "1.15.1"
+
+[lints.rust.unexpected_cfgs]
+level = "warn"
+priority = 0
+check-cfg = ["cfg(fuzzing)"]

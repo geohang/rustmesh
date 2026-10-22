@@ -1,0 +1,11 @@
+[package]
+name = "xtask"
+description = "Build tasks for rustmesh: cargo xtask web"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+# Must match the wasm-bindgen version rustmesh-app is built with.
+wasm-bindgen-cli-support = "=0.2.129"

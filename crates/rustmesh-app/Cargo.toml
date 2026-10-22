@@ -1,0 +1,44 @@
+[package]
+name = "rustmesh-app"
+description = "Desktop and web app for building 2D and 3D meshes with rustmesh."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version = "1.95"
+publish = false
+
+[dependencies]
+rustmesh = { path = "../rustmesh", features = ["serde"] }
+eframe = { version = "=0.36.2", default-features = false, features = ["accesskit", "default_fonts", "glow", "wayland", "x11", "web_screen_reader"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+log = "0.4"
+sha2 = "0.10"
+
+[build-dependencies]
+sha2 = "0.10"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+rfd = "0.17.2"
+env_logger = { version = "0.11", default-features = false, features = ["auto-color", "humantime"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+schemars = "1"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "native-tls"] }
+jsonwebtoken = { version = "10", default-features = false, features = ["rust_crypto"] }
+base64 = "0.22"
+rand = "0.8"
+url = "2"
+webbrowser = "1"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dev-dependencies]
+# Generates the throwaway key pair the sign-in tests sign tokens with.
+rsa = "0.9"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+rfd = { version = "0.17.2", default-features = false }
+wasm-bindgen = "=0.2.129"
+wasm-bindgen-futures = "0.4.79"
+js-sys = "0.3"
+web-sys = { version = "0.3.106", features = ["Window", "Document", "Element", "HtmlCanvasElement", "HtmlAnchorElement", "Blob", "BlobPropertyBag", "Url", "Worker", "WorkerOptions", "WorkerType", "MessageEvent", "ErrorEvent", "Performance"] }
