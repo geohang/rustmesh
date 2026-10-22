@@ -8,6 +8,9 @@ is the main part; 3D tetrahedral meshing is experimental.
 
 Pre-alpha. Licensed under MIT OR Apache-2.0.
 
+Website: <https://geohang.github.io/rustmesh/>. Mesh Studio runs there in the
+browser, with no install: <https://geohang.github.io/rustmesh/app/>.
+
 ## Features
 
 - 2D meshing by constrained Delaunay triangulation with Ruppert/Chew-style
@@ -112,7 +115,8 @@ println!("{} cells, complete: {}", mesh.triangles.len(), mesh.report.complete);
 
 ## The app
 
-The model builder is a desktop program and a web page. The desktop app also has an
+The model builder is a desktop program and a web page
+([online](https://geohang.github.io/rustmesh/app/)). The desktop app also has an
 optional agent panel (Sign in with ChatGPT) that drives the same project through
 MCP tools.
 

@@ -275,8 +275,11 @@ and 3.1 % (worst) of the analytic values for dipole-dipole, and within 1.6 %
 
 ## Distribution
 
-The web app is a static site (the `dist/web` folder), so GitHub Pages can host
-it; no server computes anything. The desktop programs are built per platform with
+The web app is a static site (the `dist/web` folder); no server computes
+anything. `.github/workflows/pages.yml` builds it with the website in `site/`
+and publishes both on GitHub Pages: the app at
+<https://geohang.github.io/rustmesh/app/>. `python site/figures.py` redraws the
+website's figures from meshes made by the Python package. The desktop programs are built per platform with
 cargo. Unsigned programs get a SmartScreen warning on Windows and are blocked by
 Gatekeeper on macOS until they are signed and notarized, and managed computers
 may not run downloaded programs at all; the web app works there.

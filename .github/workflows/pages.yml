@@ -1,0 +1,64 @@
+name: Website
+
+# Builds the website (site/) with Mesh Studio's web app under app/ and deploys
+# it to GitHub Pages (Settings > Pages > Source: GitHub Actions).
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "crates/rustmesh/**"
+      - "crates/rustmesh-app/**"
+      - "vendor/spade/**"
+      - "xtask/**"
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build the site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Rust with the WebAssembly target
+        run: |
+          rustup toolchain install stable --profile minimal --target wasm32-unknown-unknown
+          rustup default stable
+      - name: Build the web app
+        run: cargo xtask web
+      - name: Put the site together
+        run: |
+          mkdir -p _site/app
+          cp site/index.html _site/
+          cp -r site/images _site/
+          cp dist/web/index.html dist/web/worker.js dist/web/rustmesh_app.js \
+            dist/web/rustmesh_app_bg.wasm _site/app/
+          ls -l _site _site/app
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

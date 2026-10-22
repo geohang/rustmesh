@@ -19,3 +19,5 @@
 - Desktop and web app with a command line, a revisioned workspace, an MCP server
   and an optional agent panel (Sign in with ChatGPT).
 - The patched triangulation library is vendored as `rustmesh-spade`.
+- A website (`site/`) with Mesh Studio's web app under `app/`, published on
+  GitHub Pages by `.github/workflows/pages.yml`.
