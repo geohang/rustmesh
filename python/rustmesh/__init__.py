@@ -141,10 +141,9 @@ def triangulate(vertices, segments=None, *, vertex_markers=None, segment_markers
         them, except where they cross other segments).
     keep_boundary : bool
         Also keep whole every segment piece with the domain on one side only
-        (outside or a hole on the other). This is the behaviour of Triangle's
-        ``-Y`` switch, which pyGIMLi's ``preserveBoundary`` uses. Cells next to
-        kept segments may then miss ``min_angle`` or ``max_area``; the report
-        counts them.
+        (outside or a hole on the other). The pyGIMLi adapter sets it for
+        ``preserveBoundary=True``. Cells next to kept segments may then miss
+        ``min_angle`` or ``max_area``; the report counts them.
     """
     if strict:
         _strict_integer_input(segments, np.int64, "segments")

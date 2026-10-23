@@ -1,4 +1,4 @@
-"""Write E4D's TetGen-style mesh files from a :class:`rustmesh.Mesh3D`.
+"""Write E4D mesh files from a :class:`rustmesh.Mesh3D`.
 
 File specification: PNNL E4D Electrical Methods Mesh Files. No meshing
 executable is called; the module only writes the mesh files E4D reads.

@@ -15,8 +15,8 @@ pub struct Region {
 
 /// A planar straight-line graph, the input of [`crate::triangulate`].
 ///
-/// The same information as a Triangle `.poly` file or a pyGIMLi PLC. Marker
-/// vectors may be left empty (all zero).
+/// Vertices and segments with optional markers, regions and hole seeds.
+/// Marker vectors may be left empty (all zero).
 #[derive(Debug, Clone, Default)]
 pub struct Plc {
     pub vertices: Vec<[f64; 2]>,

@@ -148,11 +148,11 @@ shape outlines and lines give edge markers, points give node markers.
 
 The general templates mark edges with small positive numbers (the channel: inlet
 1, outlet 2, walls 3, cylinder 4). The geophysics and aquifer-well templates
-follow pyGIMLi: sensors are nodes with marker -99, the ground surface edges -1
-(no-flow, homogeneous Neumann), the sides, bottom and air top -2 (mixed). The
-surface ERT and crosshole templates lay out pyGIMLi's outer region (cell marker 1)
-and inversion region (2); in the others each material has its own cell marker,
-and the magnetotelluric air is 0.
+use the markers pyGIMLi reads: sensors are nodes with marker -99, the ground
+surface edges -1 (no-flow, homogeneous Neumann), the sides, bottom and air top -2
+(mixed). The surface ERT and crosshole templates have an outer region (cell
+marker 1) and an inversion region (2); in the others each material has its own
+cell marker, and the magnetotelluric air is 0.
 
 ## Files
 

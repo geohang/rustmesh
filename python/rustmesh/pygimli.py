@@ -72,8 +72,8 @@ def to_pygimli(mesh: Mesh2D | Mesh3D):
     out.createNeighborInfos()
     # An edge keeps the triangulation's vertex order, so on the outline its
     # cell may come out on the right; pyGIMLi then does not count the edge as
-    # outside() (appendTriangleBoundary, boundary conditions). Triangle's
-    # edges have their cell on the left.
+    # outside() (appendTriangleBoundary, boundary conditions), which expects
+    # an outline edge's cell on its left.
     out.fixBoundaryDirections()
     return out
 
@@ -83,7 +83,7 @@ SENSOR_MARKER = -99
 
 
 def map_quality(quality: float, policy: str = "exact") -> Dict[str, Any]:
-    """Resolve a 2D angle request; cap30 is an opt-in compatibility policy.
+    """Resolve a 2D angle request; the opt-in ``cap30`` policy caps it at 30 degrees.
 
     This is a target mapping, not a mesh-quality or termination guarantee.
     The original and effective targets remain distinct in the adapter report.
@@ -136,10 +136,8 @@ def create_mesh(plc, quality: float = 28.0, area: float = 0.0, *,
     input and backend failures do not carry a partial mesh. Smoothing
     (``smooth=``) is not done; other keywords are ignored.
     ``preserveBoundary=True`` adds no node on the domain's boundary (segments
-    with the outside or a hole on one side). That is the behaviour of
-    Triangle's ``-Y`` switch, which pyGIMLi's ``createMesh(...,
-    preserveBoundary=...)`` uses. Cells along the boundary may then miss the
-    angle or area goal, which ``strict`` treats like any unmet goal.
+    with the outside or a hole on one side). Cells along the boundary may then
+    miss the angle or area goal, which ``strict`` treats like any unmet goal.
     ``return_report=True`` returns ``(pygimli_mesh, report)``. Native quality and
     completion fields describe the effective target; ``angle_mapping`` also
     records measured violations and completion for the original request. The

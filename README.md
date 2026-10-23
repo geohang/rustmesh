@@ -13,10 +13,11 @@ browser, with no install: <https://geohang.github.io/rustmesh/app/>.
 
 ## Features
 
-- 2D meshing by constrained Delaunay triangulation with Ruppert/Chew-style
-  refinement, on the vendored [spade](vendor/spade/PATCHES.md) kernel. Segments,
-  vertices, regions with their own marker and largest cell area, and holes are
-  kept, and segments that cross are split where they cross.
+- 2D meshing by constrained Delaunay triangulation and Delaunay refinement
+  (Ruppert; Chew; references in [docs/design.md](docs/design.md)), on the
+  vendored [spade](vendor/spade/PATCHES.md) kernel. Segments, vertices, regions
+  with their own marker and largest cell area, and holes are kept, and segments
+  that cross are split where they cross.
 - Quality targets: a smallest angle and a largest area per region, cell sizes that
   grow away from chosen points, and segments that refinement must not split
   (`keep_segments`, `keep_boundary`).

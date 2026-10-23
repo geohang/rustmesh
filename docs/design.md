@@ -145,10 +145,9 @@ violations counted for both, in `report["angle_mapping"]`. The default,
 `keep_segments` lists input segments that refinement must not split: no vertex
 is added on them, except where other segments cross them. `keep_boundary` keeps
 every piece with the domain on one side only (outside, or a hole on the other).
-This is the behaviour of Triangle's `-Y` switch, which pyGIMLi's
-`preserveBoundary` uses, and it lets a mesh that is joined along that boundary
-to another mesh match it node for node. Cells next to a kept edge may miss the
-angle or area target, and the report counts them.
+The pyGIMLi adapter sets it for `preserveBoundary=True`. It lets a mesh that is
+joined along that boundary to another mesh match it node for node. Cells next
+to a kept edge may miss the angle or area target, and the report counts them.
 
 ### Resource limits
 
@@ -206,7 +205,7 @@ same markers, so zones embedded as PLC edges keep working. pyGIMLi's usual
 settings are cells marked 1 (outer region) and 2 and above (inversion region),
 boundary markers -1 (ground surface, Neumann) and -2 (mixed), sensors -99.
 
-Triangle's smoothing (`smooth=[2, 10]`) is not done; other keywords are
+The adapter does not smooth (pyGIMLi's `smooth=` keyword); other keywords are
 ignored. `electrode_size` and `size_growth` refine around the PLC's sensor
 nodes. pyGIMLi's forward modelling expects the cell of an outline edge on its
 left, so `to_pygimli` calls `fixBoundaryDirections`.

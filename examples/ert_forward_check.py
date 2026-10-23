@@ -3,7 +3,7 @@
 Builds pyGIMLi's ERT parameter-mesh geometry (``createParaMeshPLC``) and
 meshes it with Triangle as PyHydroGeophysX calls it (34 degrees, smoothed),
 also with 2 to 6 surface nodes between neighbouring electrodes (``addNodes``,
-PyHydroGeophysX's ``surface_nodes``: Triangle's way of refining at the
+PyHydroGeophysX's ``surface_nodes``, which refine a Triangle mesh at the
 electrodes), with Triangle at rustmesh's angle (28 degrees), and with rustmesh
 (28 degrees, with and without electrode refinement). Each mesh is run twice:
 

@@ -62,8 +62,8 @@ a fixed input order.
 ### Quality improvement (`min_dihedral > 0`)
 
 - Flips. Edge removal (3-2, 4-4, 5-6 ... flips, with the best retriangulation
-  of the edge's ring chosen by Klincsek's dynamic programme, after Shewchuk's
-  topological improvement of tetrahedral meshes) and 2-3 face flips, applied to
+  of the edge's ring chosen by Klincsek's dynamic programme; Shewchuk, "Two
+  discrete optimization algorithms", below) and 2-3 face flips, applied to
   the cells below the target, worst first. A flip is kept only if the worst
   dihedral of the cells it replaces strictly improves. Constraint faces and
   edges are never removed, a flip stays inside one region, new cells need a
@@ -74,8 +74,8 @@ a fixed input order.
   circumcentre of the sliver, when that point lies inside the domain, encroaches
   no constraint triangle and keeps a quarter of the cell's shortest edge from
   every vertex. A circumcentre that encroaches a constraint triangle splits its
-  longest edge instead, following the encroachment rule of Shewchuk's Delaunay
-  refinement papers; this also refines skinny boundary triangles. The next pass
+  longest edge instead (the encroachment rule of Delaunay refinement; Shewchuk,
+  below); this also refines skinny boundary triangles. The next pass
   rebuilds and recovers as usual.
 - Rollback. The state before each insertion is kept. If recovery cannot
   follow (it fails, runs past its allowance of new vertices, or the domain

@@ -3,7 +3,7 @@
 //! [`Example::build`] turns them into a plain [`Geometry2D`] that can then be
 //! edited like any other.
 //!
-//! The geophysics templates follow pyGIMLi's markers: sensors are nodes with
+//! The geophysics templates use the markers pyGIMLi reads: sensors are nodes with
 //! marker -99, the ground surface edges -1, the other outer edges -2.
 
 use std::f64::consts::PI;
@@ -161,8 +161,7 @@ impl Example {
             }
             Example::LShape => "An L-shaped domain with cells refined at its inner corner, where solutions are singular.",
             Example::SurfaceErt => {
-                "Electrodes on a low hill, an inversion region under them and a wide outer region, laid out \
-                 as pyGIMLi does."
+                "Electrodes on a low hill, an inversion region under them and a wide outer region."
             }
             Example::Crosshole => "Sensors in two boreholes (ERT, seismic or radar) and an inversion region between them.",
             Example::Refraction => {

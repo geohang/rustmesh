@@ -734,9 +734,9 @@ fn circumsphere(p: [Point; 4]) -> Option<(Point, f64)> {
 
 /// Local topological improvement of the cells below a dihedral target:
 /// edge removal (the 3-2, 4-4, 5-6, ... flips, with the best retriangulation
-/// of the edge's ring chosen by Klincsek's dynamic programme, as in
-/// Shewchuk's "Two discrete optimization algorithms for the topological
-/// improvement of tetrahedral meshes") and 2-3 face flips. A change is kept
+/// of the edge's ring chosen by Klincsek's dynamic programme; J. R. Shewchuk,
+/// "Two discrete optimization algorithms for the topological improvement of
+/// tetrahedral meshes") and 2-3 face flips. A change is kept
 /// only when its selected worst-cell score strictly improves (dihedral for
 /// ordinary meshing, normalized mean ratio for experimental edge sizing).
 /// Constraint faces and edges are never removed, every change stays inside
@@ -1698,8 +1698,8 @@ fn tetrahedralize_impl(
                     _ => continue,
                 }
                 // An encroached constraint piece is split at its longest
-                // edge instead (the encroachment rule of Shewchuk's Delaunay
-                // refinement papers), which also refines skinny boundary
+                // edge instead (the encroachment rule of Delaunay refinement,
+                // see docs/mesh3d.md), which also refines skinny boundary
                 // triangles that no interior vertex can fix.
                 if let Some(c) = constraints
                     .iter()

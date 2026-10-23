@@ -40,9 +40,9 @@ pub struct Options {
     /// they are still split at the crossing.
     pub keep_segments: Vec<usize>,
     /// Also keep whole every segment piece on the domain's boundary (outside
-    /// or a hole on one side). This is the behaviour of Triangle's `-Y`
-    /// switch, which pyGIMLi's `preserveBoundary` uses. A mesh that is later
-    /// joined along that boundary to another mesh then matches it node for node.
+    /// or a hole on one side). The pyGIMLi adapter sets it for
+    /// `preserveBoundary=True`. A mesh that is later joined along that boundary
+    /// to another mesh then matches it node for node.
     pub keep_boundary: bool,
 }
 
