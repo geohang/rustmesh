@@ -21,3 +21,6 @@
 - The patched triangulation library is vendored as `rustmesh-spade`.
 - A website (`site/`) with Mesh Studio's web app under `app/`, published on
   GitHub Pages by `.github/workflows/pages.yml`.
+- `THIRD_PARTY_NOTICES.md`; `cargo xtask web` writes the licence texts of the
+  crates and fonts in the web app to `THIRD_PARTY_LICENSES.txt`, which the
+  website publishes beside the app and Mesh Studio's About menu links to.

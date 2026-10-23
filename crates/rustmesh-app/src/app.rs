@@ -498,6 +498,7 @@ impl MeshApp {
             ui.selectable_value(&mut self.mode3d, false, "2D");
             ui.selectable_value(&mut self.mode3d, true, "3D");
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                ui.menu_button("About", Self::about_menu);
                 ui.menu_button("Appearance", |ui| {
                     egui::widgets::global_theme_preference_buttons(ui);
                 });
@@ -534,6 +535,41 @@ impl MeshApp {
                 }
             });
         });
+    }
+
+    /// Version and licence, and the licences of the crates and fonts the app
+    /// is built with: on the web the file `cargo xtask web` puts next to the
+    /// page, on the desktop the notices in the repository.
+    fn about_menu(ui: &mut egui::Ui) {
+        ui.label(format!(
+            "rustmesh {} · MIT OR Apache-2.0",
+            env!("CARGO_PKG_VERSION")
+        ));
+        ui.label(
+            RichText::new("Fonts: Hack, Noto Emoji, Ubuntu Light, emoji-icon-font")
+                .small()
+                .weak(),
+        );
+        #[cfg(target_arch = "wasm32")]
+        {
+            ui.add(
+                egui::Hyperlink::from_label_and_url(
+                    "Third-party licences",
+                    "THIRD_PARTY_LICENSES.txt",
+                )
+                .open_in_new_tab(true),
+            );
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            const NOTICES: &str =
+                "https://github.com/geohang/rustmesh/blob/main/THIRD_PARTY_NOTICES.md";
+            if ui.link("Third-party licences").clicked() {
+                if let Err(e) = webbrowser::open(NOTICES) {
+                    log::warn!("could not open {NOTICES}: {e}");
+                }
+            }
+        }
     }
 
     fn template_section(&mut self, ui: &mut egui::Ui) {

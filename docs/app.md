@@ -224,7 +224,11 @@ python -m http.server 8000 -d dist/web
 ```
 
 `cargo xtask web` runs wasm-bindgen as a library, so no wasm-bindgen command-line
-tool and no C compiler is needed.
+tool and no C compiler is needed. It also writes `THIRD_PARTY_LICENSES.txt`
+beside the app: the licence texts of the crates and fonts compiled into it
+(`cargo xtask licenses` writes that file alone). It stops if a crate's licence
+text cannot be found; `EXTRAS` in `xtask/src/licenses.rs` then names the files
+that hold it.
 
 On Windows with rustup's GNU toolchain and no full MinGW (no Visual Studio),
 three things matter; the MSVC toolchain needs none of them.
@@ -278,7 +282,9 @@ and 3.1 % (worst) of the analytic values for dipole-dipole, and within 1.6 %
 The web app is a static site (the `dist/web` folder); no server computes
 anything. `.github/workflows/pages.yml` builds it with the website in `site/`
 and publishes both on GitHub Pages: the app at
-<https://geohang.github.io/rustmesh/app/>. `python site/figures.py` redraws the
+<https://geohang.github.io/rustmesh/app/>, with its third-party licences at
+<https://geohang.github.io/rustmesh/app/THIRD_PARTY_LICENSES.txt> (also under
+About in the app). `python site/figures.py` redraws the
 website's figures from meshes made by the Python package. The desktop programs are built per platform with
 cargo. Unsigned programs get a SmartScreen warning on Windows and are blocked by
 Gatekeeper on macOS until they are signed and notarized, and managed computers

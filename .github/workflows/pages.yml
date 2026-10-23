@@ -11,6 +11,7 @@ on:
       - "crates/rustmesh-app/**"
       - "vendor/spade/**"
       - "xtask/**"
+      - "LICENSE-APACHE"
       - "Cargo.toml"
       - "Cargo.lock"
       - ".github/workflows/pages.yml"
@@ -43,7 +44,7 @@ jobs:
           cp site/index.html _site/
           cp -r site/images _site/
           cp dist/web/index.html dist/web/worker.js dist/web/rustmesh_app.js \
-            dist/web/rustmesh_app_bg.wasm _site/app/
+            dist/web/rustmesh_app_bg.wasm dist/web/THIRD_PARTY_LICENSES.txt _site/app/
           ls -l _site _site/app
       - uses: actions/upload-pages-artifact@v3
         with:
